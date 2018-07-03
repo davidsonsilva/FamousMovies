@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Famous Movies</string>
+    <string name="most_popular_text">Most Popular</string>
+    <string name="best_qualify_text">Best Qualify</string>
+    <string name="top_rated_text">Top Rated</string>
+    <string name="toast_msg_for_menu_top_rated">Top Rated clicked</string>
+    <string name="toast_msg_for_menu_most_popular">Most Popular clicked</string>
+</resources>

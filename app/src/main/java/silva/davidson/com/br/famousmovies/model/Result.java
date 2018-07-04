@@ -1,10 +1,8 @@
 package silva.davidson.com.br.famousmovies.model;
 
-import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
+//TODO - Usar na Fase 2
 public class Result {
+/*
 
 @SerializedName("vote_count")
 @Expose
@@ -17,7 +15,7 @@ private Integer id;
 private Boolean video;
 @SerializedName("vote_average")
 @Expose
-private Integer voteAverage;
+private Float voteAverage;
 @SerializedName("title")
 @Expose
 private String title;
@@ -73,11 +71,11 @@ public void setVideo(Boolean video) {
 this.video = video;
 }
 
-public Integer getVoteAverage() {
+public Float getVoteAverage() {
 return voteAverage;
 }
 
-public void setVoteAverage(Integer voteAverage) {
+public void setVoteAverage(Float voteAverage) {
 this.voteAverage = voteAverage;
 }
 
@@ -160,5 +158,6 @@ return releaseDate;
 public void setReleaseDate(String releaseDate) {
 this.releaseDate = releaseDate;
 }
+*/
 
 }

@@ -15,6 +15,14 @@ public abstract class MovieDBService {
     private static final String POPULAR_MOVIES = "movie/popular?api_key=" + API_KEY;
     private static final String TOP_RATED = "movie/top_rated?api_key=" + API_KEY;
 
+    public static String getApiKey() {
+        return API_KEY;
+    }
+
+    public static String getBaseUrlApi() {
+        return BASE_URL_API;
+    }
+
     public static String getPopularMovies() {
         return BASE_URL_API + POPULAR_MOVIES;
     }

@@ -23,15 +23,15 @@ import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 
 public class MainActivity extends BaseActivity {
 
-    private GridView mGridview;
+    private GridView mGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mGridview = findViewById(R.id.grid_view);
-        mGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView = findViewById(R.id.grid_view);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Movie movie = (Movie) parent.getItemAtPosition(position);
@@ -40,11 +40,11 @@ public class MainActivity extends BaseActivity {
         });
 
         if (verifyConnection()) {
-            //Defaul Value for begin
+            //Default Value for begin
             fetchMovies(MovieDBService.getPopularMovies());
             /*getMoviesWithRetrofitApi();*/
         } else {
-            Toast.makeText(this, "No connection aviable !", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_conection_text, Toast.LENGTH_LONG).show();
         }
 
         setTitle(R.string.app_name);
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
         FetchMovies fetchMovies = new FetchMovies();
         try {
             List<Movie> mMovies = fetchMovies.execute(MovieDBService.buildUrl(type)).get();
-            mGridview.setAdapter(new MovieAdapter(this, mMovies, new PicassoImageLoader()));
+            mGridView.setAdapter(new MovieAdapter(this, mMovies, new PicassoImageLoader()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), response.body().getResults().get(0).getTitle(), Toast.LENGTH_LONG).show();
                     List<Result> movieTMDB = response.body().getResults();
-                    //mGridview.setAdapter(new MovieAdapter(MainActivity.this, movieTMDB, new PicassoImageLoader()));
+                    //mGridView.setAdapter(new MovieAdapter(MainActivity.this, movieTMDB, new PicassoImageLoader()));
                 }
             }
 

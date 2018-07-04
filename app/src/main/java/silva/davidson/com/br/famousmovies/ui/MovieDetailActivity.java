@@ -1,11 +1,8 @@
 package silva.davidson.com.br.famousmovies.ui;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -20,7 +17,7 @@ import silva.davidson.com.br.famousmovies.model.Movie;
 
 public class MovieDetailActivity extends BaseActivity implements ImageLoader {
 
-    private static final String BUNDLE_RECORD = "MoviefRecord";
+    private static final String BUNDLE_RECORD = "MovieRecord";
 
     @BindView(R.id.app_bar_image)
     ImageView mAppBarImage;

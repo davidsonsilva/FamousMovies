@@ -30,7 +30,7 @@
             app:toolbarId="@+id/toolbar"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
-            app:contentScrim="?attr/colorPrimary">
+            app:contentScrim="@color/colorPrimary">
 
             <ImageView
                 android:id="@+id/app_bar_image"
@@ -89,7 +89,7 @@
 
             <TextView
                 android:id="@+id/label_vote_average"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_title"
                 android:text="@string/label_text_vote_average"
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_release_date"
-                android:text="@string/text_label_everview"
+                android:text="@string/text_label_overview"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp" />
 
@@ -139,11 +139,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label_overview"
-                android:layout_margin="16dp"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat"
                 android:text="@string/lorem_ipsum"
-                android:textColor="@color/textPrimaryColor" />
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/textPrimaryColor"
+                android:textSize="20sp" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

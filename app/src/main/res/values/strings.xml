@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">Famous Movies</string>
     <string name="most_popular_text">Most Popular</string>
-    <string name="best_qualify_text">Best Qualify</string>
     <string name="top_rated_text">Top Rated</string>
-    <string name="toast_msg_for_menu_top_rated">Top Rated clicked</string>
-    <string name="toast_msg_for_menu_most_popular">Most Popular clicked</string>
     <string name="vote_average_reference">Vote Average</string>
     <string name="release_date_reference">Release Date</string>
     <string name="label_text_title">Tittle</string>
     <string name="label_text_vote_average">Average</string>
     <string name="label_text_release_date">Release date:</string>
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="text_label_everview">Overview</string>
+    <string name="text_label_overview">Overview</string>
     <string name="load_image_error_message">Load Image Error</string>
+    <string name="cd_movie_image">movie_image</string>
+    <string name="no_conection_text">No connection available !</string>
 </resources>

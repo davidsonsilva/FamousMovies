@@ -1,8 +1,5 @@
 package silva.davidson.com.br.famousmovies.model;
 
-import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 //TODO - Usar na Fase 2
 public class MovieTMDB {
 

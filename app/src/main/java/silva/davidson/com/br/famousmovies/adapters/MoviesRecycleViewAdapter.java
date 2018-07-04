@@ -7,10 +7,11 @@ import android.view.ViewGroup;
 //TODO - Usar na Fase 2
 public class MoviesRecycleViewAdapter extends RecyclerView.Adapter<MoviesRecycleViewAdapter.ViewHolder> {
 
-    @NonNull
+
     @Override
     public MoviesRecycleViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        //Todo - not implemented yet
+        return new ViewHolder(parent);
     }
 
     @Override

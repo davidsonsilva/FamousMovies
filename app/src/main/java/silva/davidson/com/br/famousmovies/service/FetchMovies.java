@@ -1,9 +1,6 @@
 package silva.davidson.com.br.famousmovies.service;
 
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.ProgressBar;
-
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

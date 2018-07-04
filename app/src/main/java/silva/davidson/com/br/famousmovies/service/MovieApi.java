@@ -1,7 +1,5 @@
 package silva.davidson.com.br.famousmovies.service;
 
-import android.content.Context;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

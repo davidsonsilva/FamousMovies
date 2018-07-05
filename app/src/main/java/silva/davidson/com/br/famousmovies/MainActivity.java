@@ -10,18 +10,22 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import silva.davidson.com.br.famousmovies.adapters.MovieAdapter;
 import silva.davidson.com.br.famousmovies.base.BaseActivity;
+import silva.davidson.com.br.famousmovies.interfaces.AsyncTaskDelegate;
+import silva.davidson.com.br.famousmovies.interfaces.ReviewListener;
 import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.model.Review;
+import silva.davidson.com.br.famousmovies.rest.MovieApi;
+import silva.davidson.com.br.famousmovies.rest.ReviewResponse;
 import silva.davidson.com.br.famousmovies.service.FetchMovies;
 import silva.davidson.com.br.famousmovies.service.MovieDBService;
 import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
 import silva.davidson.com.br.famousmovies.utilities.NetworkUtils;
 import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AsyncTaskDelegate, ReviewListener {
 
     private GridView mGridView;
 
@@ -36,19 +40,17 @@ public class MainActivity extends BaseActivity {
                                     int position, long id) {
                 Movie movie = (Movie) parent.getItemAtPosition(position);
                 MovieDetailActivity.startActivity(MainActivity.this, movie);
+                getMoviesWithRetrofitApi(movie.getId());
             }
         });
 
         if (verifyConnection()) {
             //Default Value for begin
             fetchMovies(MovieDBService.getPopularMovies());
-            /*getMoviesWithRetrofitApi();*/
         } else {
             Toast.makeText(this, R.string.no_conection_text, Toast.LENGTH_LONG).show();
         }
-
         setTitle(R.string.app_name);
-
     }
 
     @Override
@@ -72,22 +74,15 @@ public class MainActivity extends BaseActivity {
                 fetchMovies(MovieDBService.getTopRated());
             }
         } else {
-            Toast.makeText(this, "No connection aviable !", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_conection_text, Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void fetchMovies(String type) {
-        FetchMovies fetchMovies = new FetchMovies();
-        try {
-            List<Movie> mMovies = fetchMovies.execute(MovieDBService.buildUrl(type)).get();
-            mGridView.setAdapter(new MovieAdapter(this, mMovies, new PicassoImageLoader()));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        FetchMovies fetchMovies = new FetchMovies(this, this);
+        fetchMovies.execute(MovieDBService.buildUrl(type));
     }
 
 
@@ -95,25 +90,39 @@ public class MainActivity extends BaseActivity {
         return NetworkUtils.networkStatus(this);
     }
 
-    //TODO:Works Fine (Implement fase 2)
+    @Override
+    public void processFinish(Object output) {
+        if(output != null){
+            //Recupero a lista retornada pelo asynctask
+            List<Movie> movies = (List<Movie>) output;
+            //atualizo o grid
+            mGridView = findViewById(R.id.grid_view);
+            mGridView.setAdapter(new MovieAdapter(this, movies, new PicassoImageLoader()));
+        }else{
+            Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();
+        }
+    }
 
-    /*private void getMoviesWithRetrofitApi() {
-        MovieApi.getInstance().create(MovieService.class).getPopularMovies(MovieDBService.getApiKey(), "", 1).enqueue(new Callback<MovieTMDB>() {
-            @Override
-            public void onResponse(Call<MovieTMDB> call, Response<MovieTMDB> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), response.body().getResults().get(0).getTitle(), Toast.LENGTH_LONG).show();
-                    List<Result> movieTMDB = response.body().getResults();
-                    //mGridView.setAdapter(new MovieAdapter(MainActivity.this, movieTMDB, new PicassoImageLoader()));
-                }
-            }
+    @Override
+    public void success(ReviewResponse response) {
+        if(response != null){
+            //Recupero a lista retornada pelo asynctask
+            List<Review> reviews = response.getReviews();
+            Toast.makeText(this, reviews.get(0).getContent(),Toast.LENGTH_LONG).show();
+            //atualizo o grid
+            //mGridView = findViewById(R.id.grid_view);
+            //mGridView.setAdapter(new MovieAdapter(this, movies, new PicassoImageLoader()));
+        }else{
+            Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();
+        }
+    }
 
-            @Override
-            public void onFailure(Call<MovieTMDB> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "error" + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
-
+    private void getMoviesWithRetrofitApi(int movieId) {
+        MovieApi movieApi = new MovieApi(this, this);
+        movieApi.getMovieReview(movieId);
+    }
 
 }
+
+
+

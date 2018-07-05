@@ -1,9 +1,16 @@
-package silva.davidson.com.br.famousmovies.model;
+package silva.davidson.com.br.famousmovies.rest;
 
-//TODO - Usar na Fase 2
-public class MovieTMDB {
 
-/*    @SerializedName("page")
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import silva.davidson.com.br.famousmovies.model.Result;
+
+public class MovieResponse {
+
+    @SerializedName("page")
     @Expose
     private Integer page;
     @SerializedName("total_results")
@@ -46,6 +53,6 @@ public class MovieTMDB {
 
     public void setResults(List<Result> results) {
     this.results = results;
-    }*/
+    }
 }
 

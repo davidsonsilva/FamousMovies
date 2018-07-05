@@ -1,8 +1,10 @@
 package silva.davidson.com.br.famousmovies.ui;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -67,19 +69,12 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader {
 
     @Override
     public void loadImage(ImageView view, String source) {
+        Picasso.get().load(source).into(view);
+    }
 
-        Picasso.get().load(source)
-                .into(view, new Callback() {
-                    @Override
-                    public void onSuccess() {
+    @Override
+    public void loadImage(ImageView view, String source, @NonNull ProgressBar progressBar) {
 
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-
-                    }
-                });
     }
 
 }

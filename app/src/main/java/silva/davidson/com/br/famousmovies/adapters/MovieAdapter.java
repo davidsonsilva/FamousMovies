@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -52,19 +48,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         if(movie != null) {
             if(mImageLoader != null) {
                 progressBar.setVisibility(View.VISIBLE);
-                Picasso.get().load(MOVIE_IMAGE_BASE_URL + movie.getPosterPath())
-                        .into(iconView, new Callback() {
-                            @Override
-                            public void onSuccess() {
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
-
-                            @Override
-                            public void onError(Exception e) {
-                                Toast.makeText(getContext(), R.string.load_image_error_message,
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        });
+                mImageLoader.loadImage(iconView, MOVIE_IMAGE_BASE_URL + movie.getPosterPath(), progressBar);
             }
         }
         return convertView;

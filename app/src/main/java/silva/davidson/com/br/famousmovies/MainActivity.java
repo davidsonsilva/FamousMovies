@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements AsyncTaskDelegate, Rev
 
     @Override
     public void success(ReviewResponse response) {
-        if(response != null){
+        if(response != null && response.getReviews().size() > 0){
             //Recupero a lista retornada pelo asynctask
             List<Review> reviews = response.getReviews();
             Toast.makeText(this, reviews.get(0).getContent(),Toast.LENGTH_LONG).show();

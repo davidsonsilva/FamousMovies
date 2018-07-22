@@ -25,7 +25,7 @@ import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
 import silva.davidson.com.br.famousmovies.utilities.NetworkUtils;
 import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 
-public class MainActivity extends BaseActivity implements AsyncTaskDelegate, ReviewListener {
+public class MainActivity extends BaseActivity implements AsyncTaskDelegate {
 
     private GridView mGridView;
 
@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity implements AsyncTaskDelegate, Rev
                                     int position, long id) {
                 Movie movie = (Movie) parent.getItemAtPosition(position);
                 MovieDetailActivity.startActivity(MainActivity.this, movie);
-                getMoviesWithRetrofitApi(movie.getId());
             }
         });
 
@@ -103,24 +102,7 @@ public class MainActivity extends BaseActivity implements AsyncTaskDelegate, Rev
         }
     }
 
-    @Override
-    public void success(ReviewResponse response) {
-        if(response != null && response.getReviews().size() > 0){
-            //Recupero a lista retornada pelo asynctask
-            List<Review> reviews = response.getReviews();
-            Toast.makeText(this, reviews.get(0).getContent(),Toast.LENGTH_LONG).show();
-            //atualizo o grid
-            //mGridView = findViewById(R.id.grid_view);
-            //mGridView.setAdapter(new MovieAdapter(this, movies, new PicassoImageLoader()));
-        }else{
-            Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();
-        }
-    }
 
-    private void getMoviesWithRetrofitApi(int movieId) {
-        MovieApi movieApi = new MovieApi(this, this);
-        movieApi.getMovieReview(movieId);
-    }
 
 }
 

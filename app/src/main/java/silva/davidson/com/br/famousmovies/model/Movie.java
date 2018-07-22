@@ -1,10 +1,21 @@
 package silva.davidson.com.br.famousmovies.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "favorite_movies")
 public class Movie implements Parcelable {
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "movieid")
+    private int mId;
 
     @SerializedName("id")
     private int id;
@@ -55,6 +66,15 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+    @NonNull
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(@NonNull int mId) {
+        this.mId = mId;
+    }
 
     public int getId() {
         return id;

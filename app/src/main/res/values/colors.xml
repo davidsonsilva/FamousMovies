@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="textPrimaryColor">#000000</color>
+    <!--   color for the app bar and other primary UI elements #3F51B5-->
+    <color name="colorPrimary">@color/blackNetFlix</color> <!--#000000-->
+    <!--   a darker variant of the primary color, used for
+           the status bar (on Android 5.0+) and contextual app bars -->
+    <color name="colorPrimaryDark">@color/redNetFlix</color> <!--#303F9F-->
+    <color name="colorAccent">@color/darkBrowNetFlix</color> <!--#FF4081-->
+    <color name="textPrimaryColor">#ffffff</color>
+
+    <!--Netflix Colors-->
+    <!--Raisin Black-->
+    <color name="blackNetFlix">#221F1F</color>
+    <!--KU Crimson-->
+    <color name="redNetFlix">#E50914</color>
+    <color name="whiteNetFlix">#ffffff</color>
+    <color name="grayNetFlix">#dedede</color>
+    <color name="darkBrowNetFlix">#831010</color>
+    <color name="bgBottomNavigation">#fe485a</color>
+
 </resources>

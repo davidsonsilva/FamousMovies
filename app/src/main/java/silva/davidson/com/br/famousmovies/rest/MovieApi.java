@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import silva.davidson.com.br.famousmovies.BuildConfig;
 import silva.davidson.com.br.famousmovies.interfaces.MovieService;
 import silva.davidson.com.br.famousmovies.interfaces.ReviewListener;
+import silva.davidson.com.br.famousmovies.interfaces.VideosListener;
 
 public class MovieApi {
 
@@ -24,11 +25,18 @@ public class MovieApi {
     private Context mContext;
 
     private ReviewListener reviewListenerDelegate;
+    private VideosListener videosListenerDelegate;
 
-    public MovieApi(Context context, ReviewListener responder){
+    public MovieApi(Context context, ReviewListener responderReview,
+                    VideosListener responderVideos){
         this.mContext = context;
         sService = getInstance().create(MovieService.class);
-        this.reviewListenerDelegate = responder;
+        this.reviewListenerDelegate = responderReview;
+        this.videosListenerDelegate = responderVideos;
+    }
+
+    public MovieApi(Context context ){
+        this.mContext = context;
     }
 
     private Retrofit getInstance() {
@@ -43,9 +51,9 @@ public class MovieApi {
         return retrofit;
     }
 
-/*    private <T> T create(Class<T> service) {
+    private <T> T create(Class<T> service) {
         return retrofit.create(service);
-    }*/
+    }
 
 
     public void getMovieReview(int id) {
@@ -60,6 +68,25 @@ public class MovieApi {
 
             @Override
             public void onFailure(@NonNull Call<ReviewResponse> call, @NonNull Throwable t) {
+                Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
+    public void getMovieVideos(int id){
+        sService.getVideos(id, API_KEY).enqueue(new Callback<VideosResponse>() {
+            @Override
+            public void onResponse(Call<VideosResponse> call, Response<VideosResponse> response) {
+                if(response != null) {
+                    videosListenerDelegate.success(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VideosResponse> call, Throwable t) {
                 Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

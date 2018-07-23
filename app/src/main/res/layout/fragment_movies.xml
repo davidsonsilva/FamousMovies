@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:alpha="0.2"
+        android:alpha="0.3"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
         android:elevation="4dp"/>
@@ -21,7 +21,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:fitsSystemWindows="true"
-        android:layout_height="198dp"
+        android:layout_height="200dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary">
 

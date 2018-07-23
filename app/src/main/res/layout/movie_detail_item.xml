@@ -104,9 +104,27 @@
             android:id="@+id/review_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/label_review"
+            android:paddingBottom="8dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:id="@+id/label_trailers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/review_list"
+            android:paddingBottom="8dp"
+            android:text="@string/label_trailers"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trailer_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/label_trailers"/>
 
 </RelativeLayout>

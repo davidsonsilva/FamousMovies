@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:alpha="0.3"
+        android:alpha="0.1"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
         android:elevation="4dp"/>

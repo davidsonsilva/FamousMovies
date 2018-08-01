@@ -55,4 +55,5 @@
     <string name="image_header">Image Header</string>
     <string name="label_users_reviews">Users Reviews</string>
     <string name="label_trailers">Trailers</string>
+    <string name="text_label_resolution">Resolution</string>
 </resources>

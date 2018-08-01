@@ -36,6 +36,7 @@ import silva.davidson.com.br.famousmovies.model.Videos;
 import silva.davidson.com.br.famousmovies.rest.MovieApi;
 import silva.davidson.com.br.famousmovies.rest.ReviewResponse;
 import silva.davidson.com.br.famousmovies.rest.VideosResponse;
+import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 
 public class MovieDetailActivity extends BaseActivity implements ImageLoader, ReviewListener, VideosListener {
 
@@ -145,7 +146,7 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Re
     public void success(VideosResponse response) {
         if(response != null && response.getVideos().size() > 0){
             List<Videos> trailers = response.getVideos();
-            mTrailersAdapter = new TrailersAdapter(this, trailers);
+            mTrailersAdapter = new TrailersAdapter(this, trailers, new PicassoImageLoader());
             mTrailerRecyclerView.setAdapter(mTrailersAdapter);
         }else{
             Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();

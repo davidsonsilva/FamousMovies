@@ -48,7 +48,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         if(movie != null) {
             if(mImageLoader != null) {
                 progressBar.setVisibility(View.VISIBLE);
-                mImageLoader.loadImage(iconView, MOVIE_IMAGE_BASE_URL + movie.getPosterPath(), progressBar);
+                mImageLoader.loadImage(iconView, MOVIE_IMAGE_BASE_URL + movie.getPosterPath(),
+                        progressBar);
             }
         }
         return convertView;

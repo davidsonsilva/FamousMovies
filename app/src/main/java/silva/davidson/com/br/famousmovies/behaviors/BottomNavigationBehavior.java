@@ -1,39 +1,67 @@
 package silva.davidson.com.br.famousmovies.behaviors;
 
+import java.util.logging.Logger;
+
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 
-public final class BottomNavigationBehavior extends CoordinatorLayout.Behavior {
+public class BottomNavigationBehavior<V extends View>  extends CoordinatorLayout.Behavior<V> {
 
-   public boolean layoutDependsOn(@Nullable CoordinatorLayout parent, @NonNull View child, @Nullable View dependency) {
-      if (dependency instanceof Snackbar.SnackbarLayout) {
-         this.updateSnackbar(child, (Snackbar.SnackbarLayout)dependency);
-      }
-      return super.layoutDependsOn(parent, child, dependency);
-   }
+	final private static Logger log = Logger.getLogger(BottomNavigationBehavior.class.getName());
+	
+	public BottomNavigationBehavior (Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+	
+	public BottomNavigationBehavior () {
+		super();
+	}
+	
+	@Override
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, V child, View directTargetChild,
+    		View target, int axes, int type) {
+        return axes == ViewCompat.SCROLL_AXIS_VERTICAL;
+    }
+	
+	@Override
+	public void onNestedPreScroll (CoordinatorLayout coordinatorLayout, 
+            V child, 
+            View target, 
+            int dx, 
+            int dy, 
+            int[] consumed, 
+            int type) {
+		   
+		super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
+	   child.setTranslationY(Math.max(0f, Math.min(child.getHeight(), child.getTranslationY() + dy)));
+	}
+	
+	
+	@Override 
+	public boolean layoutDependsOn(CoordinatorLayout parent, V child, View dependency) {
+		if(dependency instanceof Snackbar.SnackbarLayout) {
+			updateSnackbar(child, (Snackbar.SnackbarLayout)dependency);
+		}
+		
+		return super.layoutDependsOn(parent, child, dependency);
+	}
+	
+	
+	private void updateSnackbar(View child, Snackbar.SnackbarLayout snackbarLayout) {
+		if(snackbarLayout.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
+			CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)snackbarLayout.getLayoutParams();
+			
+			params.setAnchorId(child.getId());
+		    params.anchorGravity = Gravity.TOP;
+		    params.gravity = Gravity.TOP;
+		    snackbarLayout.setLayoutParams(params);
+		}
+	}
+		
 
-   private final void updateSnackbar(View child, Snackbar.SnackbarLayout snackbarLayout) {
-      if (snackbarLayout.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
-         android.view.ViewGroup.LayoutParams var10000 = snackbarLayout.getLayoutParams();
-         if (var10000 == null) {
-            //throw new TypeCastException("null cannot be cast to non-null type android.support.design.widget.CoordinatorLayout.LayoutParams");
-         }
-
-         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)var10000;
-         params.setAnchorId(child.getId());
-         params.anchorGravity = 48;
-         params.gravity = 48;
-         snackbarLayout.setLayoutParams((android.view.ViewGroup.LayoutParams)params);
-      }
-
-   }
-
-   public BottomNavigationBehavior(@NonNull Context context, @NonNull AttributeSet attrs) {
-      super(context, attrs);
-   }
 }

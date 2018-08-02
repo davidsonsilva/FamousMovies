@@ -2,6 +2,7 @@ package silva.davidson.com.br.famousmovies;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -19,13 +20,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import silva.davidson.com.br.famousmovies.adapters.MovieAdapter;
 import silva.davidson.com.br.famousmovies.base.BaseActivity;
-import silva.davidson.com.br.famousmovies.behaviors.BottomNavigationViewBehavior;
+import silva.davidson.com.br.famousmovies.behaviors.BottomNavigationBehavior;
 import silva.davidson.com.br.famousmovies.interfaces.AsyncTaskDelegate;
-import silva.davidson.com.br.famousmovies.interfaces.ReviewListener;
 import silva.davidson.com.br.famousmovies.model.Movie;
-import silva.davidson.com.br.famousmovies.model.Review;
-import silva.davidson.com.br.famousmovies.rest.MovieApi;
-import silva.davidson.com.br.famousmovies.rest.ReviewResponse;
 import silva.davidson.com.br.famousmovies.service.FetchMovies;
 import silva.davidson.com.br.famousmovies.service.MovieDBService;
 import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
@@ -62,10 +59,12 @@ public class MainActivity extends BaseActivity implements AsyncTaskDelegate,
         }
         setTitle(R.string.app_name);
 
-        /*CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mBottomNavigationView.getLayoutParams();
-        layoutParams.setBehavior(new BottomNavigationViewBehavior());*/
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams)
+                mBottomNavigationView.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationBehavior());
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -134,11 +133,11 @@ public class MainActivity extends BaseActivity implements AsyncTaskDelegate,
                     setTitle(R.string.top_rated_text);
                     fetchMovies(MovieDBService.getTopRated());
                 } else if (itemSelected == R.id.navigation_favorites){
-                    Snackbar.make(this.mBottomNavigationView, item.getTitle(),
+                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), item.getTitle(),
                             Snackbar.LENGTH_LONG).show();
                 }
             } else {
-              Snackbar.make(this.mBottomNavigationView, R.string.no_conection_text,
+              Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.no_conection_text,
                       Snackbar.LENGTH_LONG).show();
                 //Toast.makeText(this, R.string.no_conection_text, Toast.LENGTH_LONG).show();
             }

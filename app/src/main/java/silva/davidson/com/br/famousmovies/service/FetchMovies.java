@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import silva.davidson.com.br.famousmovies.interfaces.AsyncTaskDelegate;
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 import silva.davidson.com.br.famousmovies.utilities.NetworkUtils;
 
 public class FetchMovies extends AsyncTask<URL, Void, List<Movie>> {

@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import silva.davidson.com.br.famousmovies.R;
+import silva.davidson.com.br.famousmovies.interfaces.VideosListener;
 import silva.davidson.com.br.famousmovies.model.Videos;
 import silva.davidson.com.br.famousmovies.service.MovieDBService;
 import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
@@ -28,6 +29,11 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
     private List<Videos> mTrailers;
     private Context mContext;
     private PicassoImageLoader mImageLoader;
+    private VideosClickListener mClickListener;
+
+    public interface VideosClickListener {
+        void onItemClick(Videos video);
+    }
 
     public TrailersAdapter(Context context, List<Videos> trailers, PicassoImageLoader imageLoader) {
         mTrailers = trailers;
@@ -35,6 +41,9 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
         mImageLoader = imageLoader;
     }
 
+    public void setOnItemClick(VideosClickListener clickListener) {
+        this.mClickListener = clickListener;
+    }
 
     @NonNull
     @Override
@@ -54,14 +63,10 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
         return mTrailers != null ? mTrailers.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-/*        @BindView(R.id.video_image)
-        NetworkImageView mNetworkImageView;*/
         @BindView(R.id.avatar_image)
         ImageView mAvatarImage;
-        @BindView(R.id.play_buttom)
-        ImageButton imageButtonPlay;
         @BindView(R.id.video_title)
         TextView mVideoTitle;
         @BindView(R.id.video_size)
@@ -70,21 +75,15 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
         ImageView mMediaImage;
         @BindView(R.id.video_name)
         TextView mVideoName;
-        @BindView(R.id.favorite_button)
-        ImageButton mFavoriteButtom;
-        @BindView(R.id.share_button)
-        ImageButton mShareButtom;
         @BindView(R.id.supporting_text)
         TextView mSupportingText;
         @BindView(R.id.progress_image)
         ProgressBar mProgressBar;
 
-        //@BindView(R.id.video_error_message)
-        //TextView mErrorMessage;
-
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void binding(Videos video){
@@ -94,6 +93,14 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
             mSupportingText.setText(video.getName());
             mImageLoader.loadImage(mMediaImage,
                     MovieDBService.buildYoutubeThumbnailUrl(video.getKey()),mProgressBar);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mClickListener != null) {
+                mClickListener.onItemClick(mTrailers.get(getAdapterPosition()));
+            }
+
         }
     }
 }

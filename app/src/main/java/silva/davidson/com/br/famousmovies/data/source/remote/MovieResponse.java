@@ -1,4 +1,4 @@
-package silva.davidson.com.br.famousmovies.rest;
+package silva.davidson.com.br.famousmovies.data.source.remote;
 
 
 import com.google.gson.annotations.Expose;
@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import silva.davidson.com.br.famousmovies.data.Movie;
 import silva.davidson.com.br.famousmovies.model.Result;
 
 public class MovieResponse {
@@ -21,7 +22,7 @@ public class MovieResponse {
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<Movie> movies = null;
 
     public Integer getPage() {
     return page;
@@ -47,12 +48,12 @@ public class MovieResponse {
     this.totalPages = totalPages;
     }
 
-    public List<Result> getResults() {
-    return results;
+    public List<Movie> getMovies() {
+    return movies;
     }
 
-    public void setResults(List<Result> results) {
-    this.results = results;
+    public void setMovies(List<Movie> results) {
+    this.movies = results;
     }
 }
 

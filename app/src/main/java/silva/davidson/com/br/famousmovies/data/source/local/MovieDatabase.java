@@ -1,11 +1,11 @@
-package silva.davidson.com.br.famousmovies.persistence;
+package silva.davidson.com.br.famousmovies.data.source.local;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 
 @Database(entities = {Movie.class}, version = 1, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {

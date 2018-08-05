@@ -1,4 +1,4 @@
-package silva.davidson.com.br.famousmovies.rest;
+package silva.davidson.com.br.famousmovies.data.source.remote;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

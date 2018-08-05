@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import silva.davidson.com.br.famousmovies.base.BaseFragment;
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 
 public class ReviewsFragment extends BaseFragment {
 

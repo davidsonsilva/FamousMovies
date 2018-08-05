@@ -1,21 +1,21 @@
 package silva.davidson.com.br.famousmovies.ui;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
-import android.widget.ImageButton;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.NetworkImageView;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,20 +27,25 @@ import silva.davidson.com.br.famousmovies.adapters.MoviesRecycleViewAdapter;
 import silva.davidson.com.br.famousmovies.adapters.ReviewAdapter;
 import silva.davidson.com.br.famousmovies.adapters.TrailersAdapter;
 import silva.davidson.com.br.famousmovies.base.BaseActivity;
+import silva.davidson.com.br.famousmovies.factory.ViewModelFactory;
 import silva.davidson.com.br.famousmovies.interfaces.ImageLoader;
 import silva.davidson.com.br.famousmovies.interfaces.ReviewListener;
 import silva.davidson.com.br.famousmovies.interfaces.VideosListener;
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 import silva.davidson.com.br.famousmovies.model.Review;
 import silva.davidson.com.br.famousmovies.model.Videos;
-import silva.davidson.com.br.famousmovies.rest.MovieApi;
-import silva.davidson.com.br.famousmovies.rest.ReviewResponse;
-import silva.davidson.com.br.famousmovies.rest.VideosResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.ReviewResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.VideosResponse;
 import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
+import silva.davidson.com.br.famousmovies.viewmodel.MovieViewModel;
 
-public class MovieDetailActivity extends BaseActivity implements ImageLoader, ReviewListener, VideosListener {
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
+public class MovieDetailActivity extends BaseActivity implements ImageLoader, TrailersAdapter.VideosClickListener {
 
     private static final String BUNDLE_RECORD = "MovieRecord";
+    private MovieViewModel mViewModel;
+    private static final String TAG = "MovieDetailActivity";
 
     @BindView(R.id.app_bar_image)
     ImageView mAppBarImage;
@@ -64,8 +69,6 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Re
     @BindView(R.id.trailer_list)
     RecyclerView mTrailerRecyclerView;
 
-
-
     private ReviewAdapter mReviewAdapter;
     private TrailersAdapter mTrailersAdapter;
 
@@ -86,6 +89,8 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Re
         LinearLayoutManager manager = new LinearLayoutManager(this,
                 LinearLayout.HORIZONTAL, false);
 
+        final ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+        mViewModel = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
 
         if(intent.hasExtra(BUNDLE_RECORD)) {
             Movie movie = intent.getParcelableExtra(BUNDLE_RECORD);
@@ -99,25 +104,56 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Re
             mMovieReleaseDate.setText(movie.getReleaseDate());
             mMovieOverView.setText(movie.getOverview());
 
-            getMoviesWithRetrofitApi(movie.getId());
+            getReviews(movie.getId());
 
-            getVideosWithRetrofit(movie.getId());
+            getTrailers(movie.getId());
 
             setTitle(movie.getOriginalTitle());
 
             mTrailerRecyclerView.setLayoutManager(manager);
         }
 
+
+
     }
 
-    private void getMoviesWithRetrofitApi(int movieId) {
-        MovieApi movieApi = new MovieApi(this, this, this);
-        movieApi.getMovieReview(movieId);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mViewModel.getReviews().observe(this, new Observer<List<Review>>() {
+            @Override
+            public void onChanged(@Nullable List<Review> reviews) {
+                if(reviews != null && reviews.size() > 0){
+                    mReviewAdapter = new ReviewAdapter(getApplication(), reviews);
+                    mRecyclerView.setAdapter(mReviewAdapter);
+
+                }else{
+                    Log.i(TAG, getString(R.string.no_results_error));
+                    //Snackbar.make()
+                }
+            }
+        });
+
+        mViewModel.getVideos().observe(this, new Observer<List<Videos>>() {
+            @Override
+            public void onChanged(@Nullable List<Videos> videos) {
+                if(videos != null && videos.size() > 0) {
+                    mTrailersAdapter = new TrailersAdapter(getApplication(), videos,
+                            new PicassoImageLoader());
+                    mTrailerRecyclerView.setAdapter(mTrailersAdapter);
+                } else {
+                    Log.i(TAG, getString(R.string.no_results_error));
+                }
+            }
+        });
     }
 
-    private void getVideosWithRetrofit(int movieId){
-        MovieApi movieApi = new MovieApi(this, this, this);
-        movieApi.getMovieVideos(movieId);
+    private void getReviews(int movieId) {
+        mViewModel.getReviews(movieId);
+    }
+
+    private void getTrailers(int movieId){
+        mViewModel.getTrailers(movieId);
     }
 
     @Override
@@ -131,25 +167,15 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Re
     }
 
     @Override
-    public void success(ReviewResponse response) {
-        if(response != null && response.getReviews().size() > 0){
-            List<Review> reviews = response.getReviews();
-            mReviewAdapter = new ReviewAdapter(this, reviews);
-            mRecyclerView.setAdapter(mReviewAdapter);
-
-        }else{
-            Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();
-        }
+    public void onItemClick(Videos video) {
+        //Intent intent = new Intent()
     }
 
-    @Override
-    public void success(VideosResponse response) {
-        if(response != null && response.getVideos().size() > 0){
-            List<Videos> trailers = response.getVideos();
-            mTrailersAdapter = new TrailersAdapter(this, trailers, new PicassoImageLoader());
-            mTrailerRecyclerView.setAdapter(mTrailersAdapter);
-        }else{
-            Toast.makeText(this, R.string.no_results_error , Toast.LENGTH_LONG).show();
+    void  openWebPage(String url) {
+        Uri webPage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 }

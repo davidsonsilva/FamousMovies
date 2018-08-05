@@ -5,24 +5,25 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import silva.davidson.com.br.famousmovies.model.Movie;
-import silva.davidson.com.br.famousmovies.rest.ReviewResponse;
-import silva.davidson.com.br.famousmovies.rest.VideosResponse;
+import silva.davidson.com.br.famousmovies.data.Movie;
+import silva.davidson.com.br.famousmovies.data.source.remote.MovieResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.ReviewResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.VideosResponse;
 
 public interface MovieService {
-/*@GET("movie/top_rated")
-    Call<Movie> getTopRatedMovies(
+    @GET("movie/top_rated")
+    Call<MovieResponse> getTopRatedMovies(
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int pageIndex
-    );*/
+    );
 
-    /*@GET("movie/popular")
-    Call<Movie> getPopularMovies(
+    @GET("movie/popular")
+    Call<MovieResponse> getPopularMovies(
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int pageIndex
-    );*/
+    );
 
     @GET("movie/{id}/reviews")
     Call<ReviewResponse> getMovieReview(

@@ -13,6 +13,8 @@ public class BaseActivity extends AppCompatActivity {
 
     protected static final String MOVIE_BASE_URL_W185 ="https://image.tmdb.org/t/p/w185";
     protected static final String MOVIE_BASE_URL_W342 ="https://image.tmdb.org/t/p/w342";
+    protected static final Integer MOVIE_TYPE_MOST_POPULAR =  100;
+    protected static final Integer MOVIE_TYPE_TOP_RATED = 200;
 
     public void showSnackBarMessages(@IdRes int id,
                                      @StringRes int resId){

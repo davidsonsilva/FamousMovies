@@ -14,7 +14,7 @@ import java.util.List;
 
 import silva.davidson.com.br.famousmovies.R;
 import silva.davidson.com.br.famousmovies.interfaces.ImageLoader;
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 
 
 public class MovieAdapter extends ArrayAdapter<Movie> {

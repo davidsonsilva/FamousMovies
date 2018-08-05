@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import silva.davidson.com.br.famousmovies.model.Movie;
+import silva.davidson.com.br.famousmovies.data.Movie;
 
 public class NetworkUtils {
 
@@ -27,7 +27,7 @@ public class NetworkUtils {
                 JSONObject jsonObject = resArray.getJSONObject(i);
                 Movie movie = new Movie(); //New Movie object
                 movie.setId(jsonObject.optInt("id"));
-                movie.setVoteAverage(jsonObject.optInt("vote_average"));
+                movie.setVoteAverage(jsonObject.optDouble("vote_average"));
                 movie.setVoteCount(jsonObject.optInt("vote_count"));
                 movie.setOriginalTitle(jsonObject.optString("original_title"));
                 movie.setTitle(jsonObject.optString("title"));

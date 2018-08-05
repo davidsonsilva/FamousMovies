@@ -1,8 +1,11 @@
 package silva.davidson.com.br.famousmovies.model;
 
-//TODO - Usar na Fase 2
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Result {
-/*
 
 @SerializedName("vote_count")
 @Expose
@@ -158,6 +161,5 @@ return releaseDate;
 public void setReleaseDate(String releaseDate) {
 this.releaseDate = releaseDate;
 }
-*/
 
 }

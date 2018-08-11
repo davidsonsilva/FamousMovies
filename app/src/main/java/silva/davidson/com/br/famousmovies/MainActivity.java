@@ -2,27 +2,25 @@ package silva.davidson.com.br.famousmovies;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import silva.davidson.com.br.famousmovies.adapters.MovieAdapter;
 import silva.davidson.com.br.famousmovies.adapters.MoviesRecycleViewAdapter;
 import silva.davidson.com.br.famousmovies.base.BaseActivity;
 import silva.davidson.com.br.famousmovies.behaviors.BottomNavigationBehavior;
@@ -30,7 +28,9 @@ import silva.davidson.com.br.famousmovies.data.Movie;
 import silva.davidson.com.br.famousmovies.factory.ViewModelFactory;
 import silva.davidson.com.br.famousmovies.interfaces.ItemClickListener;
 import silva.davidson.com.br.famousmovies.model.MoviesFilterType;
+import silva.davidson.com.br.famousmovies.ui.CollapsingToolbarActivity;
 import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
+import silva.davidson.com.br.famousmovies.ui.MovieFavoritesActivity;
 import silva.davidson.com.br.famousmovies.utilities.NetworkUtils;
 import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 import silva.davidson.com.br.famousmovies.viewmodel.MovieViewModel;
@@ -112,8 +112,9 @@ public class MainActivity extends BaseActivity implements
                 movieViewModel.loadMovies(MoviesFilterType.MOVIE_TYPE_TOP_RATED);
             }
         } else {
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.no_conection_text,
-                    Snackbar.LENGTH_LONG).show();
+            openMyFavoriteMovies();
+            /*Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.no_conection_text,
+                    Snackbar.LENGTH_LONG).show();*/
         }
 
         return super.onOptionsItemSelected(item);
@@ -131,15 +132,12 @@ public class MainActivity extends BaseActivity implements
           if (verifyConnection()) {
                 if (itemSelected == R.id.navigation_popular) {
                     setTitle(R.string.most_popular_text);
-                    //fetchMovies(MovieDBService.getPopularMovies());
                     movieViewModel.loadMovies(MoviesFilterType.MOVIE_TYPE_MOST_POPULAR);
                 } else if (itemSelected == R.id.navigation_rated) {
                     setTitle(R.string.top_rated_text);
-                    //fetchMovies(MovieDBService.getTopRated());
                     movieViewModel.loadMovies(MoviesFilterType.MOVIE_TYPE_TOP_RATED);
                 } else if (itemSelected == R.id.navigation_favorites){
-                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), item.getTitle(),
-                            Snackbar.LENGTH_LONG).show();
+                    openMyFavoriteMovies();
                 }
             } else {
               Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.no_conection_text,
@@ -153,6 +151,12 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onClick(Movie movie) {
         MovieDetailActivity.startActivity(this, movie);
+    }
+
+    private void openMyFavoriteMovies(){
+        startActivity(new Intent(getApplicationContext(), CollapsingToolbarActivity.class));
+
+        //MovieFavoritesActivity.startActivity(this);
     }
 }
 

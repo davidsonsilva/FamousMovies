@@ -36,7 +36,6 @@
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
-
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
         "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
         "technologically advanced and open to imagination and magic.\n"
@@ -53,7 +52,16 @@
     <string name="content_text">Content</string>
     <string name="poster_movie">Poster Movie</string>
     <string name="image_header">Image Header</string>
-    <string name="label_users_reviews">Users Reviews</string>
-    <string name="label_trailers">Trailers</string>
+    <string name="label_reviews">Users Reviews: %1$s</string>
+    <string name="label_trailers">Trailers: %1$s</string>
     <string name="text_label_resolution">Resolution</string>
+
+
+    <string name="title_activity_coordinator">Coordinator Layout</string>
+    <string name="title_activity_appbar">AppBar Layout</string>
+    <string name="title_activity_tabs">Tab Layout</string>
+    <string name="title_activity_collapsing_toolbar">Collapsing Toolbar</string>
+    <string name="title_activity_collapsing_parallax">Collapsing Parallax</string>
+    <string name="title_activity_coordinator_custom_view">Coordinator Custom View</string>
+
 </resources>

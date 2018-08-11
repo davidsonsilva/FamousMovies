@@ -1,21 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--   color for the app bar and other primary UI elements #3F51B5-->
-    <color name="colorPrimary">@color/blackNetFlix</color> <!--#000000-->
-    <!--   a darker variant of the primary color, used for
-           the status bar (on Android 5.0+) and contextual app bars -->
-    <color name="colorPrimaryDark">@color/redNetFlix</color> <!--#303F9F-->
-    <color name="colorAccent">@color/darkBrowNetFlix</color> <!--#FF4081-->
-    <color name="textPrimaryColor">#ffffff</color>
+
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#e50914</color>
+
+<!--    &lt;!&ndash;   color for the app bar and other primary UI elements #3F51B5&ndash;&gt;
+    <color name="colorPrimary">#ff0000</color> &lt;!&ndash;#000000&ndash;&gt;
+    &lt;!&ndash;   a darker variant of the primary color, used for
+           the status bar (on Android 5.0+) and contextual app bars &ndash;&gt;
+    <color name="colorPrimaryDark">@color/darkBrowNetFlix</color> &lt;!&ndash;#303F9F&ndash;&gt;
+    <color name="colorAccent">#dedede</color> &lt;!&ndash;#FF4081&ndash;&gt;
+    <color name="colorPrimaryLight">@color/grayNetFlix</color>
+    -->
 
     <!--Netflix Colors-->
     <!--Raisin Black-->
-    <color name="blackNetFlix">#221F1F</color>
+    <color name="blackNetFlix">#221f1f</color>
     <!--KU Crimson-->
     <color name="redNetFlix">#e50914</color>
     <color name="whiteNetFlix">#ffffff</color>
     <color name="grayNetFlix">#dedede</color>
     <color name="darkBrowNetFlix">#831010</color>
     <color name="bgBottomNavigation">#fe485a</color>
+
+    <!--Material Design Colors-->
+    <color name="red900">#b71c1c</color>
+    <color name="red700">#d32f2f</color>
+    <color name="red500">#f44336</color>
+    <color name="red200">#ef9a9a</color>
+    <color name="red50">#ef9a9a</color>
+    <!--DarkColors-->
+    <color name="red900Dark">#7f0000</color>
+    <color name="red700Dark">#9a0007</color>
+    <color name="red500Dark">#ba000d</color>
+    <color name="red200Dark">#ba6b6c</color>
+    <color name="red50Dark">#ccb9bc</color>
+    <color name="textPrimaryDark">#000000</color>
+    <!--LightColors-->
+    <color name="red900Light">#7f0000</color>
+    <color name="red700Light">#ff6659</color>
+    <color name="red500Light">#ff7961</color>
+    <color name="red200Light">#ffcccb</color>
+    <color name="red50Light">#ffffff</color>
+    <color name="foreground_material_light">#ffffff</color>
+
+
+    <!--Adobe Collors Generator-->
+    <color name="colorPrimaryAdobe">#000000</color>
+    <color name="colorPrimaryDarkAdobe">#A71E14</color>
+    <color name="colorAccentAdobe">#04A748</color>
+    <color name="colorAccentGreyAdobe">#dedede</color>
+    <color name="colorPrimaryLightAdobe">#FF5E52</color>
+    <color name="textFont">#F44336</color>
+
+    <color name="btn_shine">#f64959</color>
+    <color name="btn_shine_fill">#FF6666</color>
+    <color name="primary_material_dark">#000000</color>
+    <color name="accent_material_dark_1">#ff4040</color>
+
+    <color name="textPrimaryColor">#ffffff</color>
+
+    <color name="actionbar_text">#f64959</color>
+    <color name="accent_material_light">#e50f0f</color>
+    <color name="background_material_light">#000000</color>
+    <color name="secondary_text_default_material_dark">#b3010000</color>
+    <color name="accent_material_dark">#d32f2f</color>
 
 </resources>

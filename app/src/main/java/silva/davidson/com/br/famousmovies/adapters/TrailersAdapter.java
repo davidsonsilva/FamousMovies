@@ -6,22 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import silva.davidson.com.br.famousmovies.R;
-import silva.davidson.com.br.famousmovies.interfaces.VideosListener;
 import silva.davidson.com.br.famousmovies.model.Videos;
-import silva.davidson.com.br.famousmovies.service.MovieDBService;
-import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
+import silva.davidson.com.br.famousmovies.rest.MovieApi;
 import silva.davidson.com.br.famousmovies.utilities.PicassoImageLoader;
 
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHolder> {
@@ -92,7 +87,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
             mVideoSize.setText(String.valueOf(video.getSize()));
             mSupportingText.setText(video.getName());
             mImageLoader.loadImage(mMediaImage,
-                    MovieDBService.buildYoutubeThumbnailUrl(video.getKey()),mProgressBar);
+                    MovieApi.buildYoutubeThumbnailUrl(video.getKey()),mProgressBar);
         }
 
         @Override

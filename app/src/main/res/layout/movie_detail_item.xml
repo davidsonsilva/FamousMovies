@@ -30,11 +30,10 @@
             android:layout_below="@id/label_movie_title"
             android:paddingBottom="8dp"
             android:text="@string/app_name"
-            android:textColor="@color/textPrimaryColor"
             android:textSize="48sp" />
 
         <TextView
-            android:id="@+id/label_vote_average"
+            android:id="@+id/label_movie_vote_average"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/movie_title"
@@ -46,10 +45,9 @@
             android:id="@+id/movie_vote_average"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label_vote_average"
+            android:layout_below="@id/movie_vote_average"
             android:paddingBottom="8dp"
             android:text="@string/vote_average_reference"
-            android:textColor="@color/textPrimaryColor"
             android:textSize="34sp" />
 
         <TextView
@@ -68,11 +66,10 @@
             android:layout_below="@id/label_release_date"
             android:paddingBottom="8dp"
             android:text="@string/release_date_reference"
-            android:textColor="@color/textPrimaryColor"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/label_overview"
+            android:id="@+id/movie_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/movie_release_date"
@@ -84,11 +81,10 @@
             android:id="@+id/movie_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label_overview"
+            android:layout_below="@id/movie_overview"
             android:paddingBottom="8dp"
             android:text="@string/lorem_ipsum"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/textPrimaryColor"
             android:textSize="20sp" />
 
         <TextView
@@ -96,9 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/movie_overview"
-            android:text="@string/label_users_reviews"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="@string/label_reviews"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/review_list"
@@ -117,7 +113,8 @@
             android:paddingBottom="8dp"
             android:text="@string/label_trailers"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            tools:text="@string/label_trailers"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/trailer_list"

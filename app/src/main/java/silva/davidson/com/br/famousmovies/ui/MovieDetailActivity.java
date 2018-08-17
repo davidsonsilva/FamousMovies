@@ -2,13 +2,16 @@ package silva.davidson.com.br.famousmovies.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -70,7 +74,8 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Tr
     RecyclerView mTrailerRecyclerView;
     @BindView(R.id.favorite_movie)
     FloatingActionButton mFavoriteFloatingActionButton;
-
+    @BindView(R.id.favorite_shine_movie)
+    ShineButton mShineButton;
 
     private ReviewAdapter mReviewAdapter;
     private TrailersAdapter mTrailersAdapter;
@@ -131,6 +136,30 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Tr
             @Override
             public void onClick(View v) {
                 mViewModel.insertMyFavoriteMovie(mMovieSelected);
+            }
+        });
+
+        mShineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v == mShineButton) {
+                    if(mShineButton.isChecked()) {
+                        mShineButton.setBackgroundColor(Color.TRANSPARENT);
+                        mViewModel.insertMyFavoriteMovie(mMovieSelected);
+                    } else {
+                        //mShineButton.setBackgroundResource(R.drawable.ic_fav);
+                        mViewModel.deletetMyFavoriteMovie(mMovieSelected);
+                    }
+
+                } /*else if(view == binding.expandButton) {
+                    if (binding.includedLayout.expandableLayout.isExpanded()) {
+                        binding.expandButton.setText(getString(R.string.read_more));
+                        binding.includedLayout.expandableLayout.collapse();
+                    } else {
+                        binding.expandButton.setText(getString(R.string.read_less));
+                        binding.includedLayout.expandableLayout.expand();
+                    }
+                }*/
             }
         });
 

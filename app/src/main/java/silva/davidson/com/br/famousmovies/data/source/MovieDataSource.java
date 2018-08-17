@@ -28,6 +28,6 @@ public interface MovieDataSource {
 
     void saveMovie(@NonNull Movie movie);
 
-    void deleteMovie(@NonNull String movieId);
+    void deleteMovie(@NonNull Movie movie);
 
 }

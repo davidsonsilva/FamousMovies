@@ -41,7 +41,7 @@ public class MovieLocalDataSource implements MovieDataSource {
 
     @Override
     public void getMovie(@NonNull String movieId, @NonNull GetMovieCallback callback) {
-
+        mExecutorService.execute(() -> callback.onMovieLoaded(mMovieDao.verifyFavorite(Integer.valueOf(movieId))));
     }
 
     @Override
@@ -52,8 +52,8 @@ public class MovieLocalDataSource implements MovieDataSource {
     }
 
     @Override
-    public void deleteMovie(@NonNull String movieId) {
-        mExecutorService.execute(() -> mMovieDao.deleteFavoriteMovie(Integer.valueOf(movieId)));
+    public void deleteMovie(@NonNull final Movie movie) {
+        mExecutorService.execute(() -> mMovieDao.deleteFavoriteMovie(movie));
         Log.e("deleteMovie", "Movie remove to favorite");
 
     }

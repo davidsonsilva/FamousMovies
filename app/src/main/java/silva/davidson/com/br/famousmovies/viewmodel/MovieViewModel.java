@@ -149,4 +149,8 @@ public class MovieViewModel extends AndroidViewModel {
     public void insertMyFavoriteMovie(Movie mMovieSelected) {
        mLocalDataSource.saveMovie(mMovieSelected);
     }
+
+    public void deletetMyFavoriteMovie(Movie mMovieSelected) {
+        mLocalDataSource.deleteMovie(mMovieSelected);
+    }
 }

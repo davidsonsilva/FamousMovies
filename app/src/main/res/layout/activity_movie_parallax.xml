@@ -58,11 +58,33 @@
         android:id="@+id/favorite_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
         android:src="@drawable/ic_favorite_black_24dp"
-        android:visibility="visible"
+        android:visibility="invisible"
+        app:allow_random_color="false"
         app:fabSize="normal"
+
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <com.sackcentury.shinebuttonlib.ShineButton
+        android:id="@+id/favorite_shine_movie"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:allow_random_color="false"
+        app:backgroundTint="@color/btn_shine"
+        app:big_shine_color="@color/btn_shine"
+        app:btn_color="@android:color/white"
+        app:btn_fill_color="@color/btn_shine_fill"
+        app:click_animation_duration="200"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"
+        app:shine_animation_duration="1500"
+        app:shine_count="20"
+        app:shine_turn_angle="10"
+        app:siShape="@raw/ic_heart"
+        app:small_shine_color="@color/btn_shine"
+        app:small_shine_offset_angle="20" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -45,23 +45,8 @@ public class MovieRepository implements MovieDataSource {
     }
 
     @Override
-    public void deleteMovie(@NonNull String movieId) {
+    public void deleteMovie(@NonNull Movie movie) {
 
     }
 
-    /*private void getMoviesFromRemoteDataSource(@NonNull final LoadMoviesCallback callback) {
-        mMoviesRemoteDataSource.getMovies(new LoadMoviesCallback() {
-
-            @Override
-            public void onMoviesLoaded(List<Movie> movies) {
-
-            }
-
-            @Override
-            public void onDataNotAvailable() {
-
-            }
-        });
-    }*/
-
-}
+   }

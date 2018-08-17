@@ -8,13 +8,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import silva.davidson.com.br.famousmovies.data.Movie;
+import silva.davidson.com.br.famousmovies.data.source.MovieDataSource;
 import silva.davidson.com.br.famousmovies.data.source.MovieRemoteDataSource;
+import silva.davidson.com.br.famousmovies.data.source.local.MovieLocalDataSource;
 import silva.davidson.com.br.famousmovies.data.source.remote.MovieRemoteApi;
 import silva.davidson.com.br.famousmovies.data.source.remote.MovieResponse;
-import silva.davidson.com.br.famousmovies.interfaces.ReviewListener;
-import silva.davidson.com.br.famousmovies.interfaces.VideosListener;
 import silva.davidson.com.br.famousmovies.model.MoviesFilterType;
 import silva.davidson.com.br.famousmovies.model.Review;
 import silva.davidson.com.br.famousmovies.model.Videos;
@@ -26,16 +27,21 @@ public class MovieViewModel extends AndroidViewModel {
 
     private MovieDatabase mDb;
     private MovieRemoteApi mMovieApi;
+    private MovieLocalDataSource mLocalDataSource;
     private MutableLiveData<List<Movie>> mMovies = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> mMoviesTopRated = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> mMoviesMostPopular = new MutableLiveData<>();
     private MutableLiveData<List<Videos>> mVideos =  new MutableLiveData<>();
     private MutableLiveData<List<Review>> mReviews = new MutableLiveData<>();
+    private LiveData<List<Movie>> mFavoriteMovies;
 
     public MovieViewModel(@NonNull Application application, MovieDatabase db) {
         super(application);
         mDb = db;
         mMovieApi = MovieRemoteApi.getInstance();
+        mLocalDataSource = MovieLocalDataSource.getInstance(Executors.newSingleThreadExecutor(),
+                mDb.getMovieDao());
+        mFavoriteMovies = mDb.getMovieDao().getAllFavoriteMovies();
     }
 
     public void start() {
@@ -136,4 +142,11 @@ public class MovieViewModel extends AndroidViewModel {
         });
     }
 
+    public LiveData<List<Movie>> getFavoriteMovies() {
+        return mFavoriteMovies;
+    }
+
+    public void insertMyFavoriteMovie(Movie mMovieSelected) {
+       mLocalDataSource.saveMovie(mMovieSelected);
+    }
 }

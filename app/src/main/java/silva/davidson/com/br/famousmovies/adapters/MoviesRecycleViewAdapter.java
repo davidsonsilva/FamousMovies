@@ -28,7 +28,7 @@ public class MoviesRecycleViewAdapter extends RecyclerView.Adapter<MoviesRecycle
     private PicassoImageLoader mImageLoader;
     private ItemClickListener mClickListener;
 
-    public MoviesRecycleViewAdapter(Context context,List<Movie> movieList, PicassoImageLoader imageLoader) {
+    public MoviesRecycleViewAdapter(Context context, List<Movie> movieList, PicassoImageLoader imageLoader) {
         this.mMovieList = movieList;
         this.mContext = context;
         this.mImageLoader = imageLoader;

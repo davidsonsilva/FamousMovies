@@ -7,12 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +26,6 @@ import silva.davidson.com.br.famousmovies.data.Movie;
 import silva.davidson.com.br.famousmovies.factory.ViewModelFactory;
 import silva.davidson.com.br.famousmovies.interfaces.ItemClickListener;
 import silva.davidson.com.br.famousmovies.model.MoviesFilterType;
-import silva.davidson.com.br.famousmovies.ui.CollapsingToolbarActivity;
 import silva.davidson.com.br.famousmovies.ui.MovieDetailActivity;
 import silva.davidson.com.br.famousmovies.ui.MovieFavoritesActivity;
 import silva.davidson.com.br.famousmovies.utilities.NetworkUtils;
@@ -154,7 +151,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void openMyFavoriteMovies(){
-        startActivity(new Intent(getApplicationContext(), CollapsingToolbarActivity.class));
+        startActivity(new Intent(getApplicationContext(), MovieFavoritesActivity.class));
 
         //MovieFavoritesActivity.startActivity(this);
     }

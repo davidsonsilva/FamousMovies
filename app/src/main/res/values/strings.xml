@@ -63,5 +63,6 @@
     <string name="title_activity_collapsing_toolbar">Collapsing Toolbar</string>
     <string name="title_activity_collapsing_parallax">Collapsing Parallax</string>
     <string name="title_activity_coordinator_custom_view">Coordinator Custom View</string>
+    <string name="favorite_movies_title">Favorites Movies</string>
 
 </resources>

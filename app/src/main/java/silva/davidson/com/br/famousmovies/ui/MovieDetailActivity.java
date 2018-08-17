@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -65,20 +68,13 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Tr
     RecyclerView mRecyclerViewReviews;
     @BindView(R.id.trailer_list)
     RecyclerView mTrailerRecyclerView;
+    @BindView(R.id.favorite_movie)
+    FloatingActionButton mFavoriteFloatingActionButton;
 
- /*   @BindView(R.id.movie_image_background)
-    ImageView mMovieImageBackground;
-    @BindView(R.id.image_view_aux)
-    ImageView aux;
-    @BindView(R.id.movie_image)
-    ImageView mMovieImage;
-    @BindView(R.id.label_review)
-    TextView labelReviews;
-    @BindView(R.id.label_trailers)
-    TextView labelTraillers;*/
 
     private ReviewAdapter mReviewAdapter;
     private TrailersAdapter mTrailersAdapter;
+    private Movie mMovieSelected;
 
     public static void startActivity (BaseActivity activity, Movie record){
         Bundle bundle = new Bundle();
@@ -110,28 +106,33 @@ public class MovieDetailActivity extends BaseActivity implements ImageLoader, Tr
         mViewModel = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
 
         if(intent.hasExtra(BUNDLE_RECORD)) {
-            Movie movie = intent.getParcelableExtra(BUNDLE_RECORD);
+            mMovieSelected = intent.getParcelableExtra(BUNDLE_RECORD);
 
-            loadImage(mMovieImage,MOVIE_BASE_URL_W342 + movie.getBackdropPath());
-            loadImage(mPosterMovie,MOVIE_BASE_URL_W185 + movie.getPosterPath());
-            mMovieTitle.setText(movie.getTitle());
-            mMovieVoteAverage.setText(String.valueOf(movie.getVoteAverage()));
-            mMovieReleaseDate.setText(movie.getReleaseDate());
-            mMovieDuration.setText("149 minutes");
-            mMovieOverView.setText(movie.getOverview());
-            mMovieRating.setRating(movie.getVoteCount());
-            mMoviePopularity.setText(String.valueOf(movie.getPopularity()));
+            loadImage(mMovieImage,MOVIE_BASE_URL_W342 + mMovieSelected.getBackdropPath());
+            loadImage(mPosterMovie,MOVIE_BASE_URL_W185 + mMovieSelected.getPosterPath());
+            mMovieTitle.setText(mMovieSelected.getTitle());
+            mMovieVoteAverage.setText(String.valueOf(mMovieSelected.getVoteAverage()));
+            mMovieReleaseDate.setText(mMovieSelected.getReleaseDate());
+            //mMovieDuration.setText("149 minutes");
+            mMovieOverView.setText(mMovieSelected.getOverview());
+            mMovieRating.setRating(mMovieSelected.getVoteCount());
+            mMoviePopularity.setText(String.valueOf(mMovieSelected.getPopularity()));
 
-            getReviews(movie.getId());
+            getReviews(mMovieSelected.getId());
 
-            getTrailers(movie.getId());
+            getTrailers(mMovieSelected.getId());
 
-            setTitle(movie.getOriginalTitle());
+            setTitle(mMovieSelected.getOriginalTitle());
 
             mTrailerRecyclerView.setLayoutManager(manager);
         }
 
-
+        mFavoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.insertMyFavoriteMovie(mMovieSelected);
+            }
+        });
 
     }
 

@@ -1,9 +1,8 @@
 package silva.davidson.com.br.famousmovies.data.source.local;
 
-import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import silva.davidson.com.br.famousmovies.data.Movie;
@@ -36,12 +35,8 @@ public class MovieLocalDataSource implements MovieDataSource {
 
     @Override
     public void getMovies(@NonNull LoadMoviesCallback callback) {
-        final List<Movie> movies = mMovieDao.getAllFavoriteMovies().getValue();
-        if (movies.isEmpty()) {
-            callback.onDataNotAvailable();
-        } else {
-            callback.onMoviesLoaded(movies);
-        }
+        mExecutorService.execute(() -> callback.onMoviesLoaded(mMovieDao.getAllFavoriteMovies().getValue()));
+
     }
 
     @Override
@@ -52,10 +47,14 @@ public class MovieLocalDataSource implements MovieDataSource {
     @Override
     public void saveMovie(@NonNull final Movie movie) {
         mExecutorService.execute(() -> mMovieDao.insertFavoriteMovie(movie));
+        Log.e("saveMovie", "Movie add to favorite");
+
     }
 
     @Override
     public void deleteMovie(@NonNull String movieId) {
         mExecutorService.execute(() -> mMovieDao.deleteFavoriteMovie(Integer.valueOf(movieId)));
+        Log.e("deleteMovie", "Movie remove to favorite");
+
     }
 }

@@ -40,8 +40,8 @@ public class MovieLocalDataSource implements MovieDataSource {
     }
 
     @Override
-    public void getMovie(@NonNull String movieId, @NonNull GetMovieCallback callback) {
-        mExecutorService.execute(() -> callback.onMovieLoaded(mMovieDao.verifyFavorite(Integer.valueOf(movieId))));
+    public void getMovie(int movieId, @NonNull GetMovieCallback callback) {
+        mExecutorService.execute(() -> callback.onMovieLoaded(mMovieDao.verifyFavorite(movieId)));
     }
 
     @Override

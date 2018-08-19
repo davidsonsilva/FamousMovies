@@ -11,19 +11,21 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import silva.davidson.com.br.famousmovies.data.Movie;
-import silva.davidson.com.br.famousmovies.data.source.MovieDataSource;
 import silva.davidson.com.br.famousmovies.data.source.MovieRemoteDataSource;
+import silva.davidson.com.br.famousmovies.data.source.local.MovieDatabase;
 import silva.davidson.com.br.famousmovies.data.source.local.MovieLocalDataSource;
 import silva.davidson.com.br.famousmovies.data.source.remote.MovieRemoteApi;
 import silva.davidson.com.br.famousmovies.data.source.remote.MovieResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.ReviewResponse;
+import silva.davidson.com.br.famousmovies.data.source.remote.VideosResponse;
 import silva.davidson.com.br.famousmovies.model.MoviesFilterType;
 import silva.davidson.com.br.famousmovies.model.Review;
 import silva.davidson.com.br.famousmovies.model.Videos;
-import silva.davidson.com.br.famousmovies.data.source.local.MovieDatabase;
-import silva.davidson.com.br.famousmovies.data.source.remote.ReviewResponse;
-import silva.davidson.com.br.famousmovies.data.source.remote.VideosResponse;
 
 public class MovieViewModel extends AndroidViewModel {
+
+    private static final int VISIBLE_THRESHOLD = 5;
+
 
     private MovieDatabase mDb;
     private MovieRemoteApi mMovieApi;
@@ -62,6 +64,10 @@ public class MovieViewModel extends AndroidViewModel {
                 getTopRatedMovies();
                 break;
             }
+            case MOVIE_TYPE_MY_FAVORITE : {
+                mFavoriteMovies = mDb.getMovieDao().getAllFavoriteMovies();
+                break;
+            }
             default:break;
         }
 
@@ -71,8 +77,12 @@ public class MovieViewModel extends AndroidViewModel {
         return mMovies;
     }
 
-    public LiveData<List<Movie>> getMoviesMostPopular() {
+    public MutableLiveData<List<Movie>> getMoviesMostPopular() {
         return mMoviesMostPopular;
+    }
+
+    public MutableLiveData<List<Movie>> getMoviesTopRated() {
+        return mMoviesTopRated;
     }
 
     public MutableLiveData<List<Review>> getReviews() {
@@ -83,12 +93,12 @@ public class MovieViewModel extends AndroidViewModel {
         return mVideos;
     }
 
-    private void getMostPopularMovies(){
+    private void getMostPopularMovies() {
        mMovieApi.getMostPopularMovies(1, new MovieRemoteDataSource.GetMoviesCallBack() {
            @Override
            public void onMovieSuccess(MovieResponse response) {
-               //mMoviesMostPopular.setValue(response.getMovies());
-               mMovies.setValue(response.getMovies());
+               mMoviesMostPopular.setValue(response.getMovies());
+               //mMovies.setValue(response.getMovies());
            }
 
            @Override
@@ -98,12 +108,12 @@ public class MovieViewModel extends AndroidViewModel {
        });
     }
 
-    private void getTopRatedMovies(){
+    private void getTopRatedMovies() {
         mMovieApi.getTopRatedMovies(1, new MovieRemoteDataSource.GetMoviesCallBack() {
             @Override
             public void onMovieSuccess(MovieResponse response) {
-                //mMoviesTopRated.setValue(response.getMovies());
-                mMovies.setValue(response.getMovies());
+                mMoviesTopRated.setValue(response.getMovies());
+                //mMovies.setValue(response.getMovies());
             }
 
             @Override
@@ -122,7 +132,7 @@ public class MovieViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onReviewsFailrue(Throwable error) {
+            public void onReviewsFailure(Throwable error) {
                 Log.e("getReviews", error.getMessage());
             }
         });
@@ -150,7 +160,16 @@ public class MovieViewModel extends AndroidViewModel {
        mLocalDataSource.saveMovie(mMovieSelected);
     }
 
-    public void deletetMyFavoriteMovie(Movie mMovieSelected) {
+    public void deleteMyFavoriteMovie(Movie mMovieSelected) {
         mLocalDataSource.deleteMovie(mMovieSelected);
     }
+
+    public MovieLocalDataSource getLocalDataSource() {
+        return mLocalDataSource;
+    }
+
+    public MovieDatabase getDb() {
+        return mDb;
+    }
+
 }

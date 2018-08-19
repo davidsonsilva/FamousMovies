@@ -15,8 +15,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintDimensionRatio="w,2:3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:srcCompat="@drawable/poster" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
     <TextView
         android:id="@+id/movie_title"
@@ -125,11 +124,9 @@
         android:id="@+id/cardOverview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:visibility="visible"
-        app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toTopOf="@+id/frame_users_reviews"
@@ -138,18 +135,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_label_overview"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/accent_material_dark_1"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="@string/text_label_overview" />
 
             <TextView
                 android:id="@+id/movie_overview"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
-        </LinearLayout>
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/primary_text" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
     <FrameLayout
@@ -195,5 +219,40 @@
             tools:listitem="@layout/video_card" />
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/fav_view"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_fav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_duration"/>
+
+    <com.sackcentury.shinebuttonlib.ShineButton
+        android:id="@+id/favorite_shine_movie"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@android:color/white"
+        app:allow_random_color="false"
+        app:backgroundTint="@color/btn_shine"
+        app:big_shine_color="@color/btn_shine"
+        app:btn_color="@android:color/white"
+        app:btn_fill_color="@color/btn_shine_fill"
+        app:click_animation_duration="200"
+        app:enable_flashing="false"
+        app:layout_constraintBottom_toBottomOf="@+id/fav_view"
+        app:layout_constraintEnd_toEndOf="@+id/fav_view"
+        app:layout_constraintStart_toStartOf="@+id/fav_view"
+        app:layout_constraintTop_toTopOf="@+id/fav_view"
+        app:shine_animation_duration="1500"
+        app:shine_count="10"
+        app:shine_turn_angle="10"
+        app:siShape="@raw/ic_heart"
+        app:small_shine_color="@color/btn_shine"
+        app:small_shine_offset_angle="20" />
 
 </android.support.constraint.ConstraintLayout>

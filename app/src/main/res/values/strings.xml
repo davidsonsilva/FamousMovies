@@ -2,67 +2,22 @@
     <string name="app_name">Famous Movies</string>
     <string name="most_popular_text">Most Popular</string>
     <string name="top_rated_text">Top Rated</string>
-    <string name="vote_average_reference">Vote Average</string>
-    <string name="release_date_reference">Release Date</string>
-    <string name="label_text_title">Title</string>
-    <string name="label_text_vote_average">Average</string>
-    <string name="label_text_release_date">Release date:</string>
-    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-        "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown"
-        "printer took a galley of type and scrambled it to make a type specimen book."
-        "It has survived not only five centuries, but also the leap into electronic typesetting,"
-        "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset"
-        "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software"
-        "like Aldus PageMaker including versions of Lorem Ipsum."</string>
     <string name="text_label_overview">Overview</string>
-    <string name="load_image_error_message">Load Image Error</string>
     <string name="cd_movie_image">movie_image</string>
     <string name="no_conection_text">No connection available !</string>
-    <string name="no_results_error">No results avaliable !</string>
     <string name="detail_movie">Detail Movie</string>
-    <string name="message_params">%1$s</string>
-
     <!--BottomNavigation-->
     <string name="title_most_popular">Popular</string>
     <string name="title_top_rated">Rated</string>
     <string name="title_my_favorites">Favorites</string>
-    <string name="msg_menu_clicado">Menu Favoritos Clicado</string>
-    <string name="trailer_text">Trailer</string>
-    <string name="error_text">Error</string>
-    <string name="video_size_text">Video Size text</string>
-    <string name="play_buttom_ctd">Play Buttom</string>
     <string name="title_tab_review">Users Reviews</string>
     <string name="title_tab_trailers">Trailers</string>
-    <string name="title_activity_movie_detail">MovieDetailActivity</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-    </string>
-    <string name="action_settings">Settings</string>
-    <string name="author_text">Author</string>
     <string name="content_text">Content</string>
-    <string name="poster_movie">Poster Movie</string>
-    <string name="image_header">Image Header</string>
-    <string name="label_reviews">Users Reviews: %1$s</string>
-    <string name="label_trailers">Trailers: %1$s</string>
     <string name="text_label_resolution">Resolution</string>
-
-
-    <string name="title_activity_coordinator">Coordinator Layout</string>
     <string name="title_activity_appbar">AppBar Layout</string>
-    <string name="title_activity_tabs">Tab Layout</string>
-    <string name="title_activity_collapsing_toolbar">Collapsing Toolbar</string>
-    <string name="title_activity_collapsing_parallax">Collapsing Parallax</string>
-    <string name="title_activity_coordinator_custom_view">Coordinator Custom View</string>
-    <string name="favorite_movies_title">Favorites Movies</string>
+    <string name="review_user">Review</string>
+    <string name="msg_favorite_movie_add">Favorite movie added</string>
+    <string name="msg_favorite_movie_del">Favorite Movie removed!</string>
+    <string name="imagetoolbar">imageToolBar</string>
 
 </resources>

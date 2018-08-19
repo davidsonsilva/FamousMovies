@@ -64,7 +64,7 @@ public class MovieRemoteApi implements MovieRemoteDataSource {
 
             @Override
             public void onFailure(@NonNull Call<ReviewResponse> call, @NonNull Throwable t) {
-                callBack.onReviewsFailrue(t);
+                callBack.onReviewsFailure(t);
             }
         });
     }
@@ -88,7 +88,7 @@ public class MovieRemoteApi implements MovieRemoteDataSource {
     }
 
     @Override
-    public void getMovies(@NonNull int page, @NonNull GetMoviesCallBack callBack) {
+    public void getMovies(int page, @NonNull GetMoviesCallBack callBack) {
 
     }
 
@@ -103,7 +103,7 @@ public class MovieRemoteApi implements MovieRemoteDataSource {
             }
 
             @Override
-            public void onFailure(@NonNull Call<MovieResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
                  callBack.onMovieFailure(t);
             }
         });
@@ -120,7 +120,7 @@ public class MovieRemoteApi implements MovieRemoteDataSource {
               }
 
               @Override
-              public void onFailure(@NonNull Call<MovieResponse> call, Throwable t) {
+              public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
                   callBack.onMovieFailure(t);
               }
           });

@@ -12,7 +12,7 @@ public interface MovieRemoteDataSource {
 
         void onReviewsSuccess(ReviewResponse response);
 
-        void onReviewsFailrue(Throwable error);
+        void onReviewsFailure(Throwable error);
     }
 
     interface GetMoviesTrailersCallBack {
@@ -33,7 +33,7 @@ public interface MovieRemoteDataSource {
 
     void getMovieVideos(int id, @NonNull GetMoviesTrailersCallBack callBack);
 
-    void getMovies(@NonNull int page, @NonNull GetMoviesCallBack callBack);
+    void getMovies(int page, @NonNull GetMoviesCallBack callBack);
 
     void getTopRatedMovies(int page, @NonNull GetMoviesCallBack callBack);
 

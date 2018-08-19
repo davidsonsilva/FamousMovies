@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<transitionManager xmlns:android="http://schemas.android.com/apk/res/android">
-    <item name="windowEnterTransition">@transition/fade</item>
-    <item name="windowSharedElementEnterTransition">@transition/move</item>
-    <item name="windowSharedElementExitTransition">@transition/move</item>
-</transitionManager>

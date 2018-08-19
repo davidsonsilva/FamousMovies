@@ -3,6 +3,7 @@ package silva.davidson.com.br.famousmovies.behaviors;
 import java.util.logging.Logger;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
@@ -23,22 +24,18 @@ public class BottomNavigationBehavior<V extends View>  extends CoordinatorLayout
 	}
 	
 	@Override
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, V child, View directTargetChild,
-    		View target, int axes, int type) {
+    public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,
+									   @NonNull V child, @NonNull View directTargetChild,
+									   @NonNull View target, int axes, int type) {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 	
 	@Override
-	public void onNestedPreScroll (CoordinatorLayout coordinatorLayout, 
-            V child, 
-            View target, 
-            int dx, 
-            int dy, 
-            int[] consumed, 
-            int type) {
-		   
+	public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout,
+		  @NonNull V child, @NonNull View target, int dx, int dy, int[] consumed, int type) {
+
 		super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
-	   child.setTranslationY(Math.max(0f, Math.min(child.getHeight(), child.getTranslationY() + dy)));
+	   	child.setTranslationY(Math.max(0f, Math.min(child.getHeight(), child.getTranslationY() + dy)));
 	}
 	
 	
